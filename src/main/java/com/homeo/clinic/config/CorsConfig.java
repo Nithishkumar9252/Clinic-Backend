@@ -7,7 +7,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-
 public class CorsConfig {
 
     @Bean
@@ -17,6 +16,10 @@ public class CorsConfig {
                 new CorsConfiguration();
 
         config.addAllowedOrigin("http://localhost:4200");
+
+        config.addAllowedOrigin(
+                "https://sahithi-homeopathy-clinic.netlify.app"
+        );
 
         config.addAllowedHeader("*");
 
