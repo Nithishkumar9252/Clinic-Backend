@@ -2,6 +2,8 @@ package com.homeo.clinic.controller;
 
 import com.homeo.clinic.entity.Followup;
 
+import com.homeo.clinic.repository.FollowupRepository;
+
 import com.homeo.clinic.service.FollowupService;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,13 @@ public class FollowupController {
             followupService;
 
     // =====================================
+    // REPOSITORY
+    // =====================================
+
+    private final FollowupRepository
+            followupRepository;
+
+    // =====================================
     // CREATE FOLLOWUP
     // =====================================
 
@@ -43,6 +52,86 @@ public class FollowupController {
 
         return
                 "Followup saved successfully";
+    }
+
+    // =====================================
+    // UPDATE FOLLOWUP
+    // =====================================
+
+    @PutMapping("/{id}")
+
+    public String updateFollowup(
+
+            @PathVariable Long id,
+
+            @RequestBody Followup updatedFollowup
+
+    ) {
+
+        Optional<Followup> optionalFollowup =
+
+                followupService
+                        .getFollowupById(id);
+
+        // =====================================
+        // FOLLOWUP NOT FOUND
+        // =====================================
+
+        if(optionalFollowup.isEmpty()){
+
+            return
+                    "Followup not found";
+        }
+
+        // =====================================
+        // EXISTING FOLLOWUP
+        // =====================================
+
+        Followup existing =
+                optionalFollowup.get();
+
+        // =====================================
+        // UPDATE FIELDS
+        // =====================================
+
+        existing.setPatientId(
+                updatedFollowup.getPatientId()
+        );
+
+        existing.setSymptoms(
+                updatedFollowup.getSymptoms()
+        );
+
+        existing.setObservations(
+                updatedFollowup.getObservations()
+        );
+
+        existing.setMedicines(
+                updatedFollowup.getMedicines()
+        );
+
+        existing.setDoctorNotes(
+                updatedFollowup.getDoctorNotes()
+        );
+
+        existing.setImprovementStatus(
+                updatedFollowup.getImprovementStatus()
+        );
+
+        existing.setNextFollowupDate(
+                updatedFollowup.getNextFollowupDate()
+        );
+
+        // =====================================
+        // SAVE UPDATED FOLLOWUP
+        // =====================================
+
+        followupRepository.save(
+                existing
+        );
+
+        return
+                "Followup updated successfully";
     }
 
     // =====================================
