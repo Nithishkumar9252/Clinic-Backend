@@ -37,7 +37,7 @@ public class Patient {
 
     private String dswOf;
 
-    @Column(unique = true)
+
     private String phoneNumber;
 
     private String occupation;
