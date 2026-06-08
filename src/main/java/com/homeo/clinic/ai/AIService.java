@@ -15,7 +15,7 @@ public class AIService {
     /* OPENROUTER API KEY */
     /* ===================================== */
 
-    @Value("${openrouter.api.key}")
+    @Value("${groq.api.key}")
 
     private String API_KEY;
 
@@ -110,7 +110,7 @@ public class AIService {
 
         String url =
 
-                "https://openrouter.ai/api/v1/chat/completions";
+                "https://api.groq.com/openai/v1/chat/completions";
 
         /* ===================================== */
         /* HEADERS */
@@ -125,15 +125,7 @@ public class AIService {
 
         headers.setBearerAuth(API_KEY);
 
-        headers.add(
-                "HTTP-Referer",
-                "http://localhost:4200"
-        );
 
-        headers.add(
-                "X-Title",
-                "Homeo AI Clinic"
-        );
 
         /* ===================================== */
         /* MESSAGE */
@@ -165,7 +157,7 @@ public class AIService {
                         */
 
                         "model",
-                        "openai/gpt-3.5-turbo",
+                        "llama-3.3-70b-versatile",
 
                         "messages",
                         List.of(message),
