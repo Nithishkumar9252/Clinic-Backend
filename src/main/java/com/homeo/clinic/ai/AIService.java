@@ -166,7 +166,7 @@ public class AIService {
                         0.7,
 
                         "max_tokens",
-                        300
+                        3000
                 );
 
         HttpEntity<Map<String,Object>> entity =
